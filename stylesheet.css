@@ -1,0 +1,23 @@
+body {
+  width: 800px;
+  margin: auto;
+  font-family: sans-serif;
+}
+
+header {
+  text-align: center;
+}
+
+footer {
+  font-size: small;
+}
+
+a {
+  color: black;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
