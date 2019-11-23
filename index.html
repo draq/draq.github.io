@@ -26,29 +26,29 @@
     </p>
   </footer>
   <script>
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-      dump(xhr.responseXML.documentElement.nodeName);
+    function displayUdhr() {
+      udhrTitle = xhr.responseXML.querySelector("udhr title");
+      document.getElementById("udhr-title").textContent = udhrTitle.textContent;
+      
+      articles = xhr.responseXML.querySelectorAll("article");
+      article = articles[Math.floor(Math.random() * articles.length)];
+      articleTitle = article.querySelector("title");
+      document.getElementById("article-title").textContent = articleTitle.textContent;
+
+      articleText = "";
+      paragraphs = article.querySelectorAll("para");
+      paragraphs.forEach(p => articleText += "<p>" + p.textContent + "</p>");
+      document.getElementById("article-text").innerHTML = articleText;
     }
+    
+    var xhr = new XMLHttpRequest();
+    xhr.onload = displayUdhr; 
     xhr.onerror = function() {
-      dump("Error while getting XML.");
+      console.log("Error while getting XML.");
     }
     xhr.open("GET", "udhr/xml/udhr_eng.xml");
     xhr.responseType = "document";
     xhr.send();
-    
-    udhrTitle = xhr.responseXML.querySelector("udhr title");
-    document.getElementById("udhr-title").textContent = udhrTitle.textContent;
-    
-    articles = xhr.responseXML.querySelectorAll("article");
-    article = articles[Math.floor(Math.random() * articles.length)];
-    articleTitle = article.querySelector("title");
-    document.getElementById("article-title").textContent = articleTitle.textContent;
-
-    articleText = "";
-    paragraphs = article.querySelectorAll("para");
-    paragraphs.forEach(p => articleText += "<p>" + p.textContent + "</p>");
-    document.getElementById("article-text").innerHtml = articleText;
-  </script>
+ </script>
 </body>
 </html>
