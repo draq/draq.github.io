@@ -3,18 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="description" content="Universal Declaration of Human Rights">
-  
-  <title> Universal Declaration of Human Rights</title>
-
+  <title>Universal Declaration of Human Rights</title>
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
 <body>
   <header>
-    <h1>Universal Declaration of Human Rights</h1> 
+    <h1>&#127880; Universal Declaration of Human Rights</h1> 
   </header>
   <main>
+    <script>
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function() {
+        dump(xhr.responseXML.documentElement.nodeName);
+      }
+      xhr.onerror = function() {
+        dump("Error while getting XML.");
+      }
+      xhr.open("GET", "udhr/xml/index.xml");
+      xhr.responseType = "document";
+      xhr.send();
+    </script>
   </main>
   <footer>
     <p>Text provided by 
