@@ -10,21 +10,11 @@
 
 <body>
   <header>
-    <h1>&#127880; Universal Declaration of Human Rights</h1> 
+    <h1 id="udhr-title"></h1> 
   </header>
   <main>
-    <script>
-      var xhr = new XMLHttpRequest();
-      xhr.onload = function() {
-        dump(xhr.responseXML.documentElement.nodeName);
-      }
-      xhr.onerror = function() {
-        dump("Error while getting XML.");
-      }
-      xhr.open("GET", "udhr/xml/index.xml");
-      xhr.responseType = "document";
-      xhr.send();
-    </script>
+    <h2 id="article-title"></h2>
+    <div id="article-text"></div>
   </main>
   <footer>
     <p>Text provided by 
@@ -32,7 +22,33 @@
         Office of the United Nations High Commissioner for Human Rights
       </a>
       and
-      <a href="https://unicode.org/udhr/">The Unicode Consortium</a></a>
+      <a href="https://unicode.org/udhr/">The Unicode Consortium</a>
+    </p>
   </footer>
+  <script>
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+      dump(xhr.responseXML.documentElement.nodeName);
+    }
+    xhr.onerror = function() {
+      dump("Error while getting XML.");
+    }
+    xhr.open("GET", "udhr/xml/udhr_eng.xml");
+    xhr.responseType = "document";
+    xhr.send();
+    
+    udhrTitle = xhr.responseXML.querySelector("udhr title");
+    document.getElementById("udhr-title").textContent = udhrTitle.textContent;
+    
+    articles = xhr.responseXML.querySelectorAll("article");
+    article = articles[Math.floor(Math.random() * articles.length)];
+    articleTitle = article.querySelector("title");
+    document.getElementById("article-title").textContent = articleTitle.textContent;
+
+    articleText = "";
+    paragraphs = article.querySelectorAll("para");
+    paragraphs.forEach(p => articleText += "<p>" + p.textContent + "</p>");
+    document.getElementById("article-text").innerHtml = articleText;
+  </script>
 </body>
 </html>
