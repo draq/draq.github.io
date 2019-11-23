@@ -8,6 +8,10 @@ header {
   text-align: center;
 }
 
+main h2 {
+  text-align: center;
+}
+
 footer {
   font-size: small;
 }
