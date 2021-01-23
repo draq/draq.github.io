@@ -76,7 +76,7 @@
     let {longitude, latitude, distance} = calculateSolarEclipicCoordinates(now);
     document.getElementById("solar-longitude").textContent = longitude.toFixed(4);
     document.getElementById("solar-latitude").textContent = latitude;
-    document.getElementById("solar-distance").textContent = distance.toFixed(4);
+    document.getElementById("solar-distance").textContent = `${distance.toFixed(4)}AU (${Math.round(distance * ASTRONOMICAL_UNIT / 1000)} km)`;
 
     let obliquity = calculateAxialTilt(now);
     document.getElementById("axial-tilt").textContent = obliquity.toFixed(4);

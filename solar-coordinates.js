@@ -1,4 +1,5 @@
 const J2000 = 2451545.0;  // Julian date at 2020-01-01
+const ASTRONOMICAL_UNIT = 149597870700;  // in metre 
 
 function assertInteger() {
   for (element of arguments) {
@@ -9,8 +10,9 @@ function assertInteger() {
   return true;
 }
 
-function calculateJulianDate(year, month, day, hour, minute) {
+function calculateJulianDate(year, month, day, hour, minute, second) {
   if (year instanceof Date) {
+    second = year.getUTCSeconds();
     minute = year.getUTCMinutes();
     hour = year.getUTCHours();
     day = year.getUTCDate();
@@ -20,7 +22,7 @@ function calculateJulianDate(year, month, day, hour, minute) {
   else {
     assertInteger(...arguments);
   }
-  console.debug(`Year = ${year}, Month = ${month}, Day = ${day}, Hour = ${hour}, Minute = ${minute}.`);
+  console.debug(`Year = ${year}, Month = ${month}, Day = ${day}, Hour = ${hour}, Minute = ${minute}, Second = ${second}.`);
 
   if (month < 3) {
     // Year starts in March
@@ -34,7 +36,7 @@ function calculateJulianDate(year, month, day, hour, minute) {
   let e = Math.floor(365.25 * (year + 4716)); //  4714 BCE November 24, 12 hours GMT (Gregorian proleptic Calendar)
   let f = Math.floor(30.6001 * (month + 1));
   let julianDayNumber = c + day + e + f - 1524.5;
-  let fraction = (hour + minute / 60) / 24;
+  let fraction = (hour + minute / 60 + second / 3600) / 24;
   console.debug(`A = ${a}, B = ${b}, C = ${c}, E = ${e}, F = ${f}, fraction = ${fraction}.`);
 
   return julianDayNumber + fraction;
