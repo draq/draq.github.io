@@ -48,6 +48,7 @@ function calculateSolarEclipicCoordinates(julianDate) {
   let g = (357.528 + 0.9856003 * n) % 360;   // mean anomaly in degrees
   g = toRadian(g); // degree to radians
   let lambda = l + 1.915 * Math.sin(g) + 0.020 * Math.sin(2*g); // solar longitude
+  lambda %= 360;
   let beta = 0; // approximately, solar latitude
   let r = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2*g); // solar distance in astronomical units.
   console.debug(`Mean longitude = ${l}°, Mean anonaly = ${g}°, Longitude = ${lambda}°`);

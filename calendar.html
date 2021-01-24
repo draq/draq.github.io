@@ -95,17 +95,17 @@
     let now = new Date();
     document.getElementById("utc-datetime").textContent = now.toUTCString();
     document.getElementById("custom-date").textContent = getCustomDateString(now);
-    document.getElementById("sexagenary-date").textContent = getSexagenaryDate(now);
 
-    now = calculateJulianDate(now);
-    document.getElementById("julian-date").textContent = now.toFixed(4);
+    let julianDate = calculateJulianDate(now);
+    document.getElementById("julian-date").textContent = julianDate.toFixed(4);
 
-    let {longitude, latitude, distance} = calculateSolarEclipicCoordinates(now);
+    let {longitude, latitude, distance} = calculateSolarEclipicCoordinates(julianDate);
+    document.getElementById("sexagenary-date").textContent = getSexagenaryDate(now, longitude);
     document.getElementById("solar-longitude").textContent = longitude.toFixed(4);
     document.getElementById("solar-latitude").textContent = latitude;
     document.getElementById("solar-distance").textContent = `${distance.toFixed(4)}AU (${Math.round(distance * ASTRONOMICAL_UNIT / 1000)} km)`;
 
-    let obliquity = calculateAxialTilt(now);
+    let obliquity = calculateAxialTilt(julianDate);
     document.getElementById("axial-tilt").textContent = obliquity.toFixed(4);
 
     let {rightAscension, declination} = calculateEquitorialCoordiantes(longitude, obliquity);
