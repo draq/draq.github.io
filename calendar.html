@@ -28,6 +28,10 @@
             <td><strong id="custom-date"></strong></td>
           </tr>
           <tr>
+            <td>干支</td>
+            <td><strong id="sexagenary-date"></strong></td>
+          </tr>
+          <tr>
             <td>Julian Date (JD)</td>
             <td id="julian-date"></td>
           </tr>
@@ -91,6 +95,7 @@
     let now = new Date();
     document.getElementById("utc-datetime").textContent = now.toUTCString();
     document.getElementById("custom-date").textContent = getCustomDateString(now);
+    document.getElementById("sexagenary-date").textContent = getSexagenaryDate(now);
 
     now = calculateJulianDate(now);
     document.getElementById("julian-date").textContent = now.toFixed(4);
@@ -105,7 +110,7 @@
 
     let {rightAscension, declination} = calculateEquitorialCoordiantes(longitude, obliquity);
     let {degree, minute, second} = getHourMinuteSecond(rightAscension);
-    document.getElementById("right-ascension").textContent = `${degree}h ${minute}m ${second.toFixed(0)}s`;
+    document.getElementById("right-ascension").textContent = `${degree}h ${minute}m ${second.toFixed(0)}s (${rightAscension.toFixed(0)}°)`;
     document.getElementById("declination").textContent = declination.toFixed(4);
   </script>
 </body>

@@ -37,7 +37,7 @@ function calculateJulianDate(year, month, day, hour, minute, second) {
   let f = Math.floor(30.6001 * (month + 1));
   let julianDayNumber = c + day + e + f - 1524.5;
   let fraction = (hour + minute / 60 + second / 3600) / 24;
-  console.debug(`A = ${a}, B = ${b}, C = ${c}, E = ${e}, F = ${f}, fraction = ${fraction}.`);
+  // console.debug(`A = ${a}, B = ${b}, C = ${c}, E = ${e}, F = ${f}, fraction = ${fraction}.`);
 
   return julianDayNumber + fraction;
 }
@@ -50,7 +50,8 @@ function calculateSolarEclipicCoordinates(julianDate) {
   let lambda = l + 1.915 * Math.sin(g) + 0.020 * Math.sin(2*g); // solar longitude
   let beta = 0; // approximately, solar latitude
   let r = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2*g); // solar distance in astronomical units.
-  
+  console.debug(`Mean longitude = ${l}°, Mean anonaly = ${g}°, Longitude = ${lambda}°`);
+
   return {
     longitude: lambda,
     latitude: beta,

@@ -26,7 +26,10 @@ const EARTHLY_BRANCHES = [
     "亥", // 12 Hài
 ]
 
-function getSexagenaryCycle(number) {
+const SEXAGENARY_DAY_START = Date.UTC(2021, 0, 15, 16);  // 16 Jan 2021 00:00:00 GMT+0800 (Beijing Time) in milliseconds since Unix epoch.
+const DAY_IN_MS = 24 * 3600 * 1000;
+
+function getSexagenaryCycle(number) { // Start with 1
     number = Math.floor(number);
     if (number < 1) {
         throw "The number must be equal or larger than 1!";
@@ -35,6 +38,26 @@ function getSexagenaryCycle(number) {
     let stem = HEAVENLY_STEMS[number % 10];
     let branch = EARTHLY_BRANCHES[number % 12];
     return stem + branch;
+}
+
+function getSexagenaryYear() {
+    return "";
+}
+
+function getSexagenaryMonth() {
+    return "";
+}
+
+function getSexagenaryDay(date) {
+    let diff = Number(date) - SEXAGENARY_DAY_START;
+    diff = Math.floor(diff / DAY_IN_MS) + 1;
+    console.debug(`Sexagenary Day = ${diff}`);
+    return getSexagenaryCycle(diff); 
+}
+
+function getSexagenaryDate(date) {
+    return `${getSexagenaryYear(date)}年 ${getSexagenaryMonth(date)}月 ${getSexagenaryDay(date)}日`;
+
 }
 
 console.debug("Sexagenary Cycle functions loaded.")
