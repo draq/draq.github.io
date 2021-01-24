@@ -9,7 +9,11 @@ header {
   text-align: center;
 }
 
-main h2 {
+main {
+  text-align: center;
+}
+
+section {
   text-align: center;
 }
 
@@ -25,6 +29,10 @@ a {
 
 a:hover {
   text-decoration: none;
+}
+
+img {
+  width: 600px;
 }
 
 .degree::after {

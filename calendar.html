@@ -16,6 +16,22 @@
   </header>
   <main>
     <section>
+      <img id='cat-of-the-day'></img>
+      <script>
+        let requestCatMeta = new XMLHttpRequest();
+        requestCatMeta.onload = function() {
+          let url = requestCatMeta.response[0].url;
+          document.getElementById("cat-of-the-day").setAttribute("src", url);
+        }
+        requestCatMeta.onerror = function() {
+          console.log("Error while getting XML.");
+        }
+        requestCatMeta.open("GET", "https://api.thecatapi.com/v1/images/search");
+        requestCatMeta.responseType = "json";
+        requestCatMeta.send();
+      </script>
+    </section>
+    <section>
       <h2>Date and Time</h2>
       <table>
         <tbody>
@@ -73,6 +89,7 @@
   <footer>
     <p>Thanks to <a href="https://quasar.as.utexas.edu/BillInfo/JulianDatesG.html">Bill Jefferys</a> for the calculation of Julian dates, 
       and <a href="https://en.wikipedia.org/wiki/Position_of_the_Sun">Wikipedia</a> for the calcuation of sun's coordinates.</p> 
+    <p>Powered by <a href="https://thecatapi.com/">The Cat API</a>.</p>
    </p>
   </footer>
   <script>

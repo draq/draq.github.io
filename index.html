@@ -1,54 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="description" content="Universal Declaration of Human Rights">
-  <title>Universal Declaration of Human Rights</title>
-  <link rel="icon" href="favicon.png">
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-</head>
-
-<body>
-  <header>
-    <h1 id="udhr-title"></h1> 
-  </header>
-  <main>
-    <h2 id="article-title"></h2>
-    <div id="article-text"></div>
-  </main>
-  <footer>
-    <p>Text provided by 
-      <a href="https://www.ohchr.org/">
-        Office of the United Nations High Commissioner for Human Rights
-      </a>
-      and
-      <a href="https://unicode.org/udhr/">The Unicode Consortium</a>.
-    </p>
-  </footer>
-  <script>
-    function displayUdhr() {
-      udhrTitle = xhr.responseXML.querySelector("udhr title");
-      document.getElementById("udhr-title").textContent = udhrTitle.textContent;
-      
-      articles = xhr.responseXML.querySelectorAll("article");
-      article = articles[Math.floor(Math.random() * articles.length)];
-      articleTitle = article.querySelector("title");
-      document.getElementById("article-title").textContent = articleTitle.textContent;
-
-      articleText = "";
-      paragraphs = article.querySelectorAll("para");
-      paragraphs.forEach(p => articleText += "<p>" + p.textContent + "</p>");
-      document.getElementById("article-text").innerHTML = articleText;
-    }
-    
-    var xhr = new XMLHttpRequest();
-    xhr.onload = displayUdhr; 
-    xhr.onerror = function() {
-      console.log("Error while getting XML.");
-    }
-    xhr.open("GET", "udhr/xml/udhr_eng.xml");
-    xhr.responseType = "document";
-    xhr.send();
- </script>
-</body>
+    <head>
+        <meta http-equiv="Refresh" content="0; URL=udhr.html">
+    </head>
 </html>
+
+  
