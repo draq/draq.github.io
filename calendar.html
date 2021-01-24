@@ -24,6 +24,10 @@
             <td id="utc-datetime"></td>
           </tr>
           <tr>
+            <td>Custom Date</td>
+            <td><strong id="custom-date"></strong></td>
+          </tr>
+          <tr>
             <td>Julian Date (JD)</td>
             <td id="julian-date"></td>
           </tr>
@@ -67,9 +71,27 @@
    </p>
   </footer>
   <script>
+    const PLANETARY_SYMBOLS = [
+      "☉", // Sun - Sunday
+      "☾", // Moon - Monday
+      "♂", // Mars - Tuesday
+      "☿", // Mercuy - Wednesday
+      "♃", // Jupiter - Thursday
+      "♀", // Venus - Friday 	
+      "♄", // Saturn - Saturday
+    ]
+
+    function getCustomDateString(date) {
+      let weekday = date.getUTCDay();
+      weekday = PLANETARY_SYMBOLS[weekday];
+      date = date.toLocaleDateString("ar").replace(/\//g, "-");
+      return  weekday + " " + date;
+    }
+
     let now = new Date();
     document.getElementById("utc-datetime").textContent = now.toUTCString();
-    
+    document.getElementById("custom-date").textContent = getCustomDateString(now);
+
     now = calculateJulianDate(now);
     document.getElementById("julian-date").textContent = now.toFixed(4);
 

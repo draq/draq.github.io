@@ -1,4 +1,4 @@
-HEAVENLY_STEMS = [
+const HEAVENLY_STEMS = [
     "甲", // 1  Jiǎ
     "乙", // 2  Yǐ
     "丙", // 3  Bǐng
@@ -11,7 +11,7 @@ HEAVENLY_STEMS = [
     "癸"  // 10 Guǐ
 ];
 
-EARTHLY_BRANCHES = [
+const EARTHLY_BRANCHES = [
     "子", // 1  Zǐ
     "丑", // 2  Chǒu
     "寅", // 3  Yín
