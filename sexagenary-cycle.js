@@ -1,56 +1,56 @@
 const HEAVENLY_STEMS = [
-    "甲", // 1  Jiǎ
-    "乙", // 2  Yǐ
-    "丙", // 3  Bǐng
-    "丁", // 4  Dīng
-    "戊", // 5  Wù
-    "己", // 6  Jǐ
-    "庚", // 7  Gēng
-    "辛", // 8  Xīn
-    "壬", // 9  Rén
-    "癸"  // 10 Guǐ
+    ["甲", "jiǎ"],   // 1
+    ["乙", "yǐ"],    // 2
+    ["丙", "bǐng"],  // 3
+    ["丁", "dīng"],  // 4
+    ["戊", "wù"],    // 5
+    ["己", "jǐ"],    // 6
+    ["庚", "gēng"],  // 7
+    ["辛", "xīn"],   // 8
+    ["壬", "rén"],   // 9
+    ["癸", "guǐ"],   // 10
 ];
 
 const EARTHLY_BRANCHES = [
-    "子", // 1  Zǐ
-    "丑", // 2  Chǒu
-    "寅", // 3  Yín
-    "卯", // 4  Mǎo
-    "辰", // 5  Chén
-    "巳", // 6  Sì
-    "午", // 7  Wǔ
-    "未", // 8  Wèi
-    "申", // 9  Shēn
-    "酉", // 10 Yǒu
-    "戌", // 11 Xū
-    "亥", // 12 Hài
+    ["子", "zǐ"],    // 1
+    ["丑", "chǒu"],  // 2
+    ["寅", "yín"],   // 3
+    ["卯", "mǎo"],   // 4
+    ["辰", "chén"],  // 5
+    ["巳", "sì"],    // 6
+    ["午", "wǔ"],    // 7
+    ["未", "wèi"],   // 8
+    ["申", "shēn"],  // 9
+    ["酉", "yǒu"],   // 10
+    ["戌", "xū"],    // 11
+    ["亥", "hài"],   // 12
 ]
 
 const SOLAR_TERMS = [
-    "立春", // 315° / lìchūn / Feb 4 / 1st month initial
-    "雨水", // 330° / yǔshuǐ / Feb 19 / 1st month midpoint
-    "惊蛰", // 345° / 驚蟄 jīngzhé / Mar 6 / 2nd month initial
-    "春分", //   0° / chūnfēn / Mar 21 / 2nd month midpoint
-    "清明", //  15	/ qīngmíng / Apr 5 / 3rd month initial
-    "谷雨", //  30° / 穀雨 gǔyǔ / Apr 20 / 3rd month midpoint
-    "立夏", //  45° / lìxià / May 6 / 4th month initial
-    "小满", //  60° / 小滿 xiǎomǎn / May 21 / 4th month midpoint
-    "芒种", //  75° / 芒種 mángzhòng / Jun 6 / 5th month initial
-    "夏至", //  90°	/ xiàzhì / Jun 21 / 5th month midpoint
-    "小暑", // 105°	/ xiǎoshǔ / Jul 7 / 6th month initial
-    "大暑", // 120°	/ dàshǔ / Jul 23 / 6th month midpoint
-    "立秋", // 135° / lìqiū / Aug 8 / 7th month initial
-    "处暑", // 150° / 處暑 chǔshǔ / Aug 23 / 7th month midpoint
-    "白露", // 165° / báilù / Sep 8 / 8th month initial
-    "秋分", // 180° / qiūfēn / Sep 23 / 8th month midpoint
-    "寒露", // 195° / hánlù / Oct 8 / 9th month initial
-    "霜降", // 210° / shuāngjiàng / Oct 23 / 9th month midpoint
-    "立冬", // 225° / lìdōng / Nov 7 / 10th month initial
-    "小雪", // 240° / xiǎoxuě / Nov 22 / 10th month midpoint
-    "大雪", // 255° / dàxuě / Dec 7 / 11th month initial
-    "冬至", // 270° / dōngzhì / Dec 22 / 11th month midpoint
-    "小寒", // 285° / xiǎohán / Jan 6 / 12th month initial
-    "大寒", // 300°	/ dàhán / Jan 20/ 12th month midpoint
+    ["立春", "lìchūn", 315], // Feb 4 / 1st month initial
+    ["雨水", "yǔshuǐ", 330], // Feb 19 / 1st month midpoint
+    ["惊蛰", "jīngzhé", 345], // 驚蟄 / Mar 6 / 2nd month initial
+    ["春分", "chūnfēn", 0], // Mar 21 / 2nd month midpoint
+    ["清明", "qīngmíng", 15], // Apr 5 / 3rd month initial
+    ["谷雨", "gǔyǔ", 30], // 穀雨 / Apr 20 / 3rd month midpoint
+    ["立夏", "lìxià", 45], // May 6 / 4th month initial
+    ["小满", "xiǎomǎn", 60], // 小滿 / May 21 / 4th month midpoint
+    ["芒种", "mángzhòng", 75], // 芒種 / Jun 6 / 5th month initial
+    ["夏至", "xiàzhì", 90], // Jun 21 / 5th month midpoint
+    ["小暑", "xiǎoshǔ", 105], // Jul 7 / 6th month initial
+    ["大暑", "dàshǔ", 120], // Jul 23 / 6th month midpoint
+    ["立秋", "lìqiū", 135], // Aug 8 / 7th month initial
+    ["处暑", "chǔshǔ", 150], // 處暑 / Aug 23 / 7th month midpoint
+    ["白露", "báilù", 165], // Sep 8 / 8th month initial
+    ["秋分", "qiūfēn", 180], // Sep 23 / 8th month midpoint
+    ["寒露", "hánlù", 195], // Oct 8 / 9th month initial
+    ["霜降", "shuāngjiàng", 210], // Oct 23 / 9th month midpoint
+    ["立冬", "lìdōng", 225], // Nov 7 / 10th month initial
+    ["小雪", "xiǎoxuě", 240], // Nov 22 / 10th month midpoint
+    ["大雪", "dàxuě", 255], // Dec 7 / 11th month initial
+    ["冬至", "dōngzhì", 270], // Dec 22 / 11th month midpoint
+    ["小寒", "xiǎohán", 285], // Jan 6 / 12th month initial
+    ["大寒", "dàhán", 300], // Jan 20 / 12th month midpoint
 ]
 
 const SEXAGENARY_DAY_START_MS = Date.UTC(2021, 0, 15, 16);  // 16 Jan 2021 00:00:00 GMT+0800 (Beijing Time) in milliseconds since Unix epoch.
@@ -65,9 +65,11 @@ function getSexagenaryCycle(number) { // Start with 1
         throw "The number must be equal or larger than 1!";
     }
     number = number % 60 - 1;
-    let stem = HEAVENLY_STEMS[number % 10];
+    let stem = HEAVENLY_STEMS[number % 10]; 
+    stem = `${stem[0]}<rt>${stem[1]}</rt>`;
     let branch = EARTHLY_BRANCHES[number % 12];
-    return stem + branch;
+    branch = `${branch[0]}<rt>${branch[1]}</rt>`;
+    return `<ruby>${stem}${branch}</ruby>`;
 }
 
 function getSexagenaryYear(date_ms) {
@@ -90,8 +92,8 @@ function getSexagenaryMonth(date_ms, longitude) {
 
 function getSolarTerm(longitude) {
     let term = Math.floor((longitude + 45) / 15);
-    term %= 24;
-    return SOLAR_TERMS[term];
+    term = SOLAR_TERMS[term % 24];
+    return `<ruby>${term[0]}<rt>${term[1]}</rt><ruby> (${term[2]}°)`;
 }
 
 function getSexagenaryDay(date_ms) {
@@ -104,7 +106,7 @@ function getSexagenaryDay(date_ms) {
 
 function getSexagenaryDate(date, longitude) {
     date_ms = Number(date);
-    return `${getSexagenaryYear(date_ms)}年 ${getSexagenaryMonth(date_ms, longitude)}月 ${getSexagenaryDay(date_ms, longitude)}日 (${getSolarTerm(longitude)})`;
+    return `${getSexagenaryYear(date_ms)}年 ${getSexagenaryMonth(date_ms, longitude)}月 ${getSexagenaryDay(date_ms, longitude)}日`;
 
 }
 

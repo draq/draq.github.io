@@ -41,11 +41,15 @@
           </tr>
           <tr>
             <td>Custom Date</td>
-            <td><strong id="custom-date"></strong></td>
+            <td id="custom-date"></td>
           </tr>
           <tr>
             <td>干支</td>
             <td><strong id="sexagenary-date"></strong></td>
+          </tr>
+          <tr>
+            <td>节气</td>
+            <td id="solar-term"></td>
           </tr>
           <tr>
             <td>Julian Date (JD)</td>
@@ -60,7 +64,7 @@
         <tbody>
           <tr>
             <td>Solar Ecliptic Longitude (&lambda;)</td>
-            <td class="degree" id="solar-longitude"></td>
+            <td class="degree"><strong id="solar-longitude"></strong></td>
           </tr>
           <tr>
             <td>Solar Ecliptic Latitude (&beta;)</td>
@@ -76,11 +80,11 @@
           </tr>
           <tr>
             <td>Right Ascension of the Sun (&alpha;)</td>
-            <td><strong id="right-ascension"></strong></td>
+            <td id="right-ascension"></td>
           </tr>
           <tr>
             <td>Declination of the Sun (&delta;)</td>
-            <td class="degree"><strong id="declination"></strong></td>
+            <td class="degree" id="declination"></td>
           </tr>
         </tbody>
       </table>
@@ -118,7 +122,9 @@
     document.getElementById("julian-date").textContent = julianDate.toFixed(4);
 
     let {longitude, latitude, distance} = calculateSolarEclipicCoordinates(julianDate);
-    document.getElementById("sexagenary-date").textContent = getSexagenaryDate(now, longitude);
+    document.getElementById("sexagenary-date").innerHTML = getSexagenaryDate(now, longitude);
+    document.getElementById("solar-term").innerHTML = getSolarTerm(longitude);
+    
     document.getElementById("solar-longitude").textContent = longitude.toFixed(4);
     document.getElementById("solar-latitude").textContent = latitude;
     document.getElementById("solar-distance").textContent = `${distance.toFixed(4)}AU (${Math.round(distance * ASTRONOMICAL_UNIT / 1000)} km)`;
