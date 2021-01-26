@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Calendar">
+  <title>Table of Characters</title>
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <script src="symbols.js"></script>
+  <script src="sexagenary-cycle.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Table of Characters</h1>
+  </header>
+  <main>
+    <section>
+      <h2>天干</h2>
+      <table>
+        <thead>
+          <tr>
+            <td>次序</td>
+            <td>汉字</td>
+            <td>拼音</td>
+          </tr>
+        </thead>
+        <tbody id="tiangan">
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>地支</h2>
+      <table>
+        <thead>
+          <tr>
+            <td>次序</td>
+            <td>汉字</td>
+            <td>拼音</td>
+          </tr>
+        </thead>
+        <tbody id="dizhi">
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>干支</h2>
+      <table>
+        <thead>
+          <tr id="ganzhi-caption"></tr>
+        </thead>
+        <tbody id="ganzhi-table">
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>节气</h2>
+      <table>
+        <thead>
+          <tr>
+            <td>太阳位于黄经角度</td>
+            <td>汉字</td>
+            <td>拼音</td>
+          </tr>
+        </thead>
+        <tbody id="jieqi">
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Planets</h2>
+      <table>
+        <thead>
+          <tr>
+            <td>Weekday</td>
+            <td>Symbol</td>
+            <td>Planet</td>
+          </tr>
+        </thead>
+        <tbody id="planets">
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Eastern Arabic Numerals</h2>
+      <table>
+        <thead>
+          <tr>
+            <td>Western</td>
+            <td>Eastern</td>
+          </tr>
+        </thead>
+        <tbody id="arabic-numerals">
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <footer>
+  </footer>
+  <script>
+    function createTable(elemList, tableElem) {
+      elemList.forEach((elem, idx) => {
+        let row = document.createElement('tr');
+        if (typeof elem == "string") { // Eastern Arabic numerals
+          row.innerHTML = `<td>${idx}</td><td>${elem}</td>`;
+        } else if (elem.length == 2) { // Heavenly stems and earthly branches
+          row.innerHTML = `<td>${idx + 1}</td><td>${elem[0]}</td><td>${elem[1]}</td>`;
+        } else if (elem.length >= 3) {
+          if (typeof elem[2] == "number") { // Solar terms
+            row.innerHTML = `<td class="degree">${elem[2]}</td><td>${elem[0]}</td><td>${elem[1]}</td>`;
+          } else { // Planetary symbols
+            row.innerHTML = `<td>${elem[2]}</td><td>${elem[0]}</td><td>${elem[1]}</td>`;
+          }
+        } else {
+          throw "elemList is of the wrong format!";
+        }
+        tableElem.appendChild(row);
+      });
+    }
+
+    // Add heavenly stems
+    createTable(HEAVENLY_STEMS, document.getElementById("tiangan"));
+    // Add earthly branches
+    createTable(EARTHLY_BRANCHES, document.getElementById("dizhi"));
+
+    // Create Sexagenary Table
+    sexagenaryCaption = document.getElementById("ganzhi-caption");
+      HEAVENLY_STEMS.forEach((elem) => {
+        let col = document.createElement("td");
+        col.innerText = elem[0];
+        sexagenaryCaption.appendChild(col);
+      })
+
+    sexagenaryTable = document.getElementById("ganzhi-table");
+    let row;
+    for (let i = 0; i < 60; i++) {
+      if (i % 10 == 0) {
+        row = document.createElement("tr")
+      }            
+      let col = document.createElement("td");
+      col.innerHTML = getSexagenaryCycle(i);
+      row.appendChild(col);
+      if ((i + 1) % 10 == 0) {
+        sexagenaryTable.appendChild(row);
+      }
+    }
+
+    // Add solar terms
+    createTable(SOLAR_TERMS, document.getElementById("jieqi"));
+    // Add planetary symbols
+    createTable(PLANETARY_SYMBOLS, document.getElementById("planets"));
+    // Add eastern Arabic numberals
+    createTable(EASTERN_ARABIC_NUMERALS, document.getElementById("arabic-numerals"))
+  </script>
+</body>
+
+</html>

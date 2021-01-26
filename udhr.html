@@ -44,7 +44,7 @@
     var xhr = new XMLHttpRequest();
     xhr.onload = displayUdhr; 
     xhr.onerror = function() {
-      console.log("Error while getting XML.");
+      console.error("Error while getting human right.");
     }
     xhr.open("GET", "udhr/xml/udhr_eng.xml");
     xhr.responseType = "document";
