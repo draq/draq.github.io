@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Metronome">
+    <title>Metronome</title>
+    <link rel="icon" href="favicon.png">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+
+<body>
+    <script>
+        let on = false;
+        let stressed = new Audio("metronome/stressed.mp3");
+        let beat = new Audio("metronome/beat.mp3");
+
+        function play_stressed() {
+            console.debug("Play stressed beat.")
+            stressed.play();
+        }
+
+        function play_beat() {
+            console.debug("Play beat.")
+            beat.play();
+        }
+
+        function stop() {
+            console.debug("Stop metronome.");
+            on = false;
+        }
+
+        function start(upper = 4, lower = 4, bpm = 80) {
+            console.debug("Start metronome.");
+            on = true;
+            interval_ms = 60/80 * 1000;
+            while (on) {
+                setTimeout(play_stressed, interval_ms);
+            }
+        }
+    </script>
+
+    <main>
+        <form>
+            <button type="button" onclick="start()">Start</button>
+            <button type="button" onclick="stop()">Stop</button>
+        </form>
+    </main>
+    <footer>
+        <p>Sound clicks provided by
+            <a href="https://freesound.org/people/Druminfected/">Druminfected
+            </a>
+            and distributed under <a href="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons 0
+                License</a>.
+        </p>
+    </footer>
+</body>
