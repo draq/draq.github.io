@@ -111,7 +111,7 @@ function calculateEquitorialCoordiantes(eclipticLongitude, eclipticObliquity) {
 
   let alpha = Math.atan2(Math.cos(epsilon) * Math.sin(lambda), Math.cos(lambda));
   // alpha = Math.atan(Math.cos(epsilon) * Math.tan(lambda));
-  alpha = toDegree(alpha, absolute=true);
+  alpha = toDegree(alpha);
   
   let delta = toDegree(Math.asin(Math.sin(epsilon) * Math.sin(lambda)));
   
