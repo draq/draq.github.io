@@ -75,9 +75,9 @@
       <table>
         <thead>
           <tr>
-            <td>Weekday</td>
             <td>Symbol</td>
             <td>Planet</td>
+            <td>Weekday</td>
           </tr>
         </thead>
         <tbody id="planets">
@@ -97,22 +97,37 @@
         </tbody>
       </table>
     </section>
+    <section>
+      <h2>八卦</h2>
+      <table>
+        <thead>
+          <tr>
+            <td>八卦</td>
+            <td>汉字</td>
+            <td>拼音</td>
+          </tr>
+        </thead>
+        <tbody id="bagua">
+        </tbody>
+      </table>
+    </section>
   </main>
   <footer>
   </footer>
   <script>
     function createTable(elemList, tableElem) {
       elemList.forEach((elem, idx) => {
+        console.log(elem)
         let row = document.createElement('tr');
         if (typeof elem == "string") { // Eastern Arabic numerals
           row.innerHTML = `<td>${idx}</td><td>${elem}</td>`;
-        } else if (elem.length == 2) { // Heavenly stems and earthly branches
+        } else if (elem.length == 2) { // Heavenly stems and earthly branches 
           row.innerHTML = `<td>${idx + 1}</td><td>${elem[0]}</td><td>${elem[1]}</td>`;
-        } else if (elem.length >= 3) {
-          if (typeof elem[2] == "number") { // Solar terms
+        } else if (elem.length >= 3) { //  
+          if (typeof elem[2] == "number") { // Solar terms 
             row.innerHTML = `<td class="degree">${elem[2]}</td><td>${elem[0]}</td><td>${elem[1]}</td>`;
-          } else { // Planetary symbols
-            row.innerHTML = `<td>${elem[2]}</td><td>${elem[0]}</td><td>${elem[1]}</td>`;
+          } else { // Planetary symbols and 八卦
+            row.innerHTML = `<td>${elem[0]}</td><td>${elem[1]}</td><td>${elem[2]}</td>`;
           }
         } else {
           throw "elemList is of the wrong format!";
@@ -158,7 +173,10 @@
     // Add planetary symbols
     createTable(PLANETARY_SYMBOLS, document.getElementById("planets"));
     // Add eastern Arabic numberals
-    createTable(EASTERN_ARABIC_NUMERALS, document.getElementById("arabic-numerals"))
+    createTable(EASTERN_ARABIC_NUMERALS, document.getElementById("arabic-numerals"));
+    
+    // Add 八卦
+    createTable(BAGUA, document.getElementById("bagua"));
   </script>
 </body>
 
