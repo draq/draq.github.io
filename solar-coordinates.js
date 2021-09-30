@@ -83,13 +83,16 @@ function toRadian(degree) {
   return degree / 180 * Math.PI;
 }
 
-function toDegree(radian, absolute=false) {
+function toDegree(radian, normed=true) {
   let degree = radian / Math.PI * 180;
-  if (absolute && degree < 360) {
-    return degree + 360;
-  } else {
-    return degree;
+  if (normed) {
+    if (degree < 0) {
+      degree += 360;
+    } else if (degree > 360) {
+      degree -= 360;
+    } 
   }
+  return degree;
 }
 
 function calculateAxialTilt(julianDate) {
@@ -109,11 +112,11 @@ function calculateEquitorialCoordiantes(eclipticLongitude, eclipticObliquity) {
   let epsilon = toRadian(eclipticObliquity); 
   console.debug(`Longitude = ${lambda}, Obliquity = ${epsilon} (in radians)`);
 
-  let alpha = Math.atan2(Math.cos(epsilon) * Math.sin(lambda), Math.cos(lambda));
-  // alpha = Math.atan(Math.cos(epsilon) * Math.tan(lambda));
-  alpha = toDegree(alpha);
+  // let alpha = Math.abs(Math.atan2(Math.cos(epsilon) * Math.sin(lambda), Math.cos(lambda)));
+  let alpha = Math.atan(Math.cos(epsilon) * Math.tan(lambda));
+  alpha = toDegree(alpha) + 180;
   
-  let delta = toDegree(Math.asin(Math.sin(epsilon) * Math.sin(lambda)));
+  let delta = toDegree(Math.asin(Math.sin(epsilon) * Math.sin(lambda)), normed=false);
   
   return { // in degree
     rightAscension: alpha,
