@@ -105,7 +105,7 @@
     function getCustomDateString(date) {
       let weekday = date.getUTCDay();
       weekday = PLANETARY_SYMBOLS[weekday][0];
-      date = date.toLocaleDateString("ar").replace(/\//g, "-");
+      date = date.toLocaleDateString("ar-EG").replace(/\//g, "-");
       return weekday + " " + date;
     }
 
