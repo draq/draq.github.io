@@ -57,6 +57,10 @@
             <td>Julian Date (JD)</td>
             <td id="julian-date"></td>
           </tr>
+          <tr>
+            <td>卦</td>
+            <td id="gua"></td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -131,7 +135,11 @@
     let { degree, minute, second } = getHourMinuteSecond(rightAscension);
     document.getElementById("right-ascension").textContent = `${degree}h ${minute}m ${second.toFixed(0)}s (${rightAscension.toFixed(0)}°)`;
     document.getElementById("declination").textContent = declination.toFixed(4);
-  </script>
+
+    let randomGua = Math.floor(Math.random() * 64);
+    document.getElementById("gua").textContent = `${X64[0][randomGua]} (${X64[1][randomGua]})`;
+
+</script>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 const HEAVENLY_STEMS = [
+    ['汉字', '拼音'],
     ["甲", "jiǎ"],   // 1
     ["乙", "yǐ"],    // 2
     ["丙", "bǐng"],  // 3
@@ -12,6 +13,7 @@ const HEAVENLY_STEMS = [
 ];
 
 const EARTHLY_BRANCHES = [
+    ['汉字', '拼音'],
     ["子", "zǐ"],    // 1
     ["丑", "chǒu"],  // 2
     ["寅", "yín"],   // 3
@@ -27,6 +29,7 @@ const EARTHLY_BRANCHES = [
 ];
 
 const SOLAR_TERMS = [
+    ['汉字', '拼音', '太阳位于黄经角度'],
     ["立春", "lìchūn", 315], // Feb 4 / 1st month initial
     ["雨水", "yǔshuǐ", 330], // Feb 19 / 1st month midpoint
     ["惊蛰", "jīngzhé", 345], // 驚蟄 / Mar 6 / 2nd month initial
@@ -54,6 +57,7 @@ const SOLAR_TERMS = [
 ];
 
 const PLANETARY_SYMBOLS = [
+    ['Symbol', 'Planet', 'Weekday'],
     ["☉", "Sun", "Sunday"],
     ["☾", "Moon", "Monday"],
     ["♂", "Mars", "Tuesday"],
@@ -78,6 +82,7 @@ const EASTERN_ARABIC_NUMERALS = [
 ];
 
 const BAGUA = [
+    ['卦', '汉字', '拼音'],
     ["⚋", "阴爻", "yīnyáo"],
     ["⚊", "阳爻", "yángyáo"],
     ["⚏", "太阴", "tàiyīn"],

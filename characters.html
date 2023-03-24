@@ -18,30 +18,12 @@
   <main>
     <section>
       <h2>天干</h2>
-      <table>
-        <thead>
-          <tr>
-            <td>次序</td>
-            <td>汉字</td>
-            <td>拼音</td>
-          </tr>
-        </thead>
-        <tbody id="tiangan">
-        </tbody>
+      <table id="tiangan">
       </table>
     </section>
     <section>
       <h2>地支</h2>
-      <table>
-        <thead>
-          <tr>
-            <td>次序</td>
-            <td>汉字</td>
-            <td>拼音</td>
-          </tr>
-        </thead>
-        <tbody id="dizhi">
-        </tbody>
+      <table id="dizhi">
       </table>
     </section>
     <section>
@@ -52,62 +34,39 @@
             <td></td>
           </tr>
         </thead>
-        <tbody id="ganzhi-table">
-        </tbody>
-      </table>
-    </section>
-    <section>
-      <h2>节气</h2>
-      <table>
-        <thead>
-          <tr>
-            <td>太阳位于黄经角度</td>
-            <td>汉字</td>
-            <td>拼音</td>
-          </tr>
-        </thead>
-        <tbody id="jieqi">
+        <tbody id="ganzhi-table" class="decorated">
         </tbody>
       </table>
     </section>
     <section>
       <h2>Planets</h2>
-      <table>
-        <thead>
-          <tr>
-            <td>Symbol</td>
-            <td>Planet</td>
-            <td>Weekday</td>
-          </tr>
-        </thead>
-        <tbody id="planets">
-        </tbody>
+      <table id="planets">
       </table>
     </section>
     <section>
       <h2>Eastern Arabic Numerals</h2>
-      <table>
-        <thead>
-          <tr>
-            <td>Western</td>
-            <td>Eastern</td>
-          </tr>
-        </thead>
-        <tbody id="arabic-numerals">
-        </tbody>
+      <table id="arabic-numerals">
+      </table>
+    </section>
+    <section>
+      <h2>节气</h2>
+      <table id="jieqi">
       </table>
     </section>
     <section>
       <h2>八卦</h2>
-      <table>
+      <table id="bagua">
+      </table>
+    </section>
+    <section>
+      <h2>六十四卦</h2>
+      <table id="liusigua">
         <thead>
-          <tr>
-            <td>八卦</td>
-            <td>汉字</td>
-            <td>拼音</td>
+          <tr id="liusigua-caption">
+            <td></td>
           </tr>
         </thead>
-        <tbody id="bagua">
+        <tbody id="liusigua-table" class="decorated">
         </tbody>
       </table>
     </section>
@@ -115,49 +74,24 @@
   <footer>
   </footer>
   <script>
-    function createTable(elemList, tableElem) {
-      elemList.forEach((elem, idx) => {
-        console.log(elem)
-        let row = document.createElement('tr');
-        if (typeof elem == "string") { // Eastern Arabic numerals
-          row.innerHTML = `<td>${idx}</td><td>${elem}</td>`;
-        } else if (elem.length == 2) { // Heavenly stems and earthly branches 
-          row.innerHTML = `<td>${idx + 1}</td><td>${elem[0]}</td><td>${elem[1]}</td>`;
-        } else if (elem.length >= 3) { //  
-          if (typeof elem[2] == "number") { // Solar terms 
-            row.innerHTML = `<td class="degree">${elem[2]}</td><td>${elem[0]}</td><td>${elem[1]}</td>`;
-          } else { // Planetary symbols and 八卦
-            row.innerHTML = `<td>${elem[0]}</td><td>${elem[1]}</td><td>${elem[2]}</td>`;
-          }
-        } else {
-          throw "elemList is of the wrong format!";
-        }
-        tableElem.appendChild(row);
-      });
-    }
-
-    // Add heavenly stems
-    createTable(HEAVENLY_STEMS, document.getElementById("tiangan"));
-    // Add earthly branches
-    createTable(EARTHLY_BRANCHES, document.getElementById("dizhi"));
 
     // Create Sexagenary Table Caption
-    sexagenaryCaption = document.getElementById("ganzhi-caption");
-      EARTHLY_BRANCHES.forEach((elem) => {
-        let col = document.createElement("td");
-        col.innerText = elem[0];
-        sexagenaryCaption.appendChild(col);
-      })
+    let sexagenaryCaption = document.getElementById("ganzhi-caption");
+    EARTHLY_BRANCHES.slice(1).forEach((elem) => {
+      let col = document.createElement("td");
+      col.innerText = elem[0];
+      sexagenaryCaption.appendChild(col);
+    });
 
     // Add Sexagenary Table Rows
-    sexagenaryTable = document.getElementById("ganzhi-table");
-    let row;
+    let sexagenaryTable = document.getElementById("ganzhi-table");
+    let row = undefined;
     for (let i = 0; i < 60; i++) {
       if (i % 12 == 0) {
         row = document.createElement("tr");
         let col = document.createElement("td");
         j = i % 10;
-        col.innerHTML = HEAVENLY_STEMS[j][0];
+        col.innerText = HEAVENLY_STEMS.slice(1)[j][0];
         row.appendChild(col); 
       }            
       let col = document.createElement("td");
@@ -168,15 +102,105 @@
       }
     }
 
+    let bagua = BAGUA.slice(7);
+
+    let liusiguaCaption = document.getElementById('liusigua-caption');
+    bagua.forEach((elem) => {
+      let col = document.createElement("td");
+      col.innerText = elem[0];
+      liusiguaCaption.appendChild(col);
+    });
+
+    let liusiguaTable = document.getElementById("liusigua-table");
+    for (let i = 0; i < 64; i++) {
+      if (i % 8 == 0) {
+        row = document.createElement("tr");
+        let col = document.createElement("td");
+        col.innerText = bagua[Math.floor(i / 8)][0];
+        row.appendChild(col);
+      }
+      let col = document.createElement('td');
+      col.innerHTML = `<ruby>${X64[0][i]}<rt>${X64[1][i]}</rt></ruby>`;
+      row.appendChild(col);
+      if ((i + 1) % 8 == 0) {
+        liusiguaTable.appendChild(row);
+      }
+    }
+
+
+    function createVerticalTable(elemList, tableElem) {
+      let header = document.createElement('thead');
+      let body = document.createElement('tbody');
+      tableElem.appendChild(header);
+      tableElem.appendChild(body);
+      headerRow = document.createElement('tr');
+      header.appendChild(headerRow);
+      elemList[0].forEach((val, _) => {
+        let td = document.createElement('td');
+        td.innerText = val;
+        headerRow.appendChild(td);
+      })
+
+      elemList.slice(1).forEach((values, _) => {
+        let row = document.createElement('tr');
+        values.forEach((val, idx) => {
+          let td = document.createElement('td');
+          td.innerText = val;
+          if (idx == 2) { // special sauce for solar terms
+            td.classList.add('degree');
+          }
+          row.appendChild(td);
+        });
+        body.appendChild(row);
+      });
+    }
+
+    function createHorizontalTable(elemList, tableElem, withIndex = true, decorated = true) {
+      let dimension = (typeof elemList[0] == "string" ? 1 : elemList[0].length) + (withIndex ? 1 : 0);
+      let rows = Array.from({length: dimension}, (_, i) => document.createElement('tr'));
+      let header = document.createElement('thead');
+      let body = document.createElement('tbody');
+      tableElem.appendChild(header);
+      tableElem.appendChild(body);
+      if (decorated) {
+        body.classList.add('decorated');
+      }
+      header.appendChild(rows[0]);
+      rows.slice(1).forEach((row, _) => body.appendChild(row));
+
+      elemList.forEach((values, idx) => {
+        if (!Array.isArray(values)) {
+          values = [values];
+        }
+        if (withIndex) {
+          if (idx === 0  && decorated) {
+            idx = '次序';
+          }
+          values.unshift(idx);
+        }
+
+        values.forEach((val, idx) => {
+          let td = document.createElement('td');
+          td.innerText = val;
+          rows[idx].appendChild(td);
+        });
+      });
+    }
+
+    // Add heavenly stems
+    createHorizontalTable(HEAVENLY_STEMS, document.getElementById("tiangan"));
+    // Add earthly branches
+    createHorizontalTable(EARTHLY_BRANCHES, document.getElementById("dizhi"));
+
     // Add solar terms
-    createTable(SOLAR_TERMS, document.getElementById("jieqi"));
+    createVerticalTable(SOLAR_TERMS, document.getElementById("jieqi"));
     // Add planetary symbols
-    createTable(PLANETARY_SYMBOLS, document.getElementById("planets"));
+    createHorizontalTable(PLANETARY_SYMBOLS, document.getElementById("planets"), false);
     // Add eastern Arabic numberals
-    createTable(EASTERN_ARABIC_NUMERALS, document.getElementById("arabic-numerals"));
+    createHorizontalTable(EASTERN_ARABIC_NUMERALS, document.getElementById("arabic-numerals"), true, false);
     
     // Add 八卦
-    createTable(BAGUA, document.getElementById("bagua"));
+    createHorizontalTable(BAGUA, document.getElementById("bagua"), false);
   </script>
 </body>
 

@@ -10,9 +10,9 @@ function getSexagenaryCycle(number) { // Start with 0
         throw "The number must be equal or larger than 1!";
     }
     number %= 60;
-    let stem = HEAVENLY_STEMS[number % 10]; 
+    let stem = HEAVENLY_STEMS.slice(1)[number % 10]; 
     stem = `${stem[0]}<rt>${stem[1]}</rt>`;
-    let branch = EARTHLY_BRANCHES[number % 12];
+    let branch = EARTHLY_BRANCHES.slice(1)[number % 12];
     branch = `${branch[0]}<rt>${branch[1]}</rt>`;
     return `<ruby>${stem}${branch}</ruby>`;
 }
