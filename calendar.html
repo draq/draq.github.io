@@ -137,7 +137,7 @@
     document.getElementById("declination").textContent = declination.toFixed(4);
 
     let randomGua = Math.floor(Math.random() * 64);
-    document.getElementById("gua").textContent = `${X64[0][randomGua]} (${X64[1][randomGua]})`;
+    document.getElementById("gua").innerHTML = getGua(randomGua, true);
 
 </script>
 </body>

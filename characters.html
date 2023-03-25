@@ -120,7 +120,7 @@
         row.appendChild(col);
       }
       let col = document.createElement('td');
-      col.innerHTML = `<ruby>${X64[0][i]}<rt>${X64[1][i]}</rt></ruby>`;
+      col.innerHTML = getGua(i);
       row.appendChild(col);
       if ((i + 1) % 8 == 0) {
         liusiguaTable.appendChild(row);

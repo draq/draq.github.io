@@ -115,7 +115,24 @@ const X64 = [
    "复", "颐", "屯", "益", "震", "噬嗑", "随", "无妄", 
    "明夷", "贲", "既济", "家人", "丰", "离", "革", "同人", 
    "临", "损", "节", "中孚", "归妹", "睽", "兑", "履", 
-   "泰", "大畜", "需", "小畜", "大壮", "大有", "夬", "乾"] 
+   "泰", "大畜", "需", "小畜", "大壮", "大有", "夬", "乾"],
+  ["kūn", "bāo", "bǐ", "guān", "yù", "jìn", "cuì", "fǒu", 
+   "qiān", "gèn", "jiǎn", "jiàn", "xiǎoguò", "lǚ", "xián", "dùn", 
+   "shī", "mēng", "kǎn", "huàn", "jiě", "wèijì", "kùn", "sòng", 
+   "shēng", "gǔ", "jǐng", "xùn", "héng", "dǐng", "dàguò", "gòu", 
+   "fù", "yí", "tún", "yì", "zhèn", "shìkē", "suí", "wúwàng", 
+   "míngyí", "bì", "jìjì", "jiārén", "fēng", "lí", "gé", "tóngrén", 
+   "lín", "sǔn", "jié", "zhōngfú", "guīmèi", "kuí", "duì", "lǚ", 
+   "tài", "dàxù", "xū", "xiǎoxù", "dàzhuàng", "dàyǒu", "guài", "qian"], 
+  // Links for https://ctext.org/book-of-changes/zhs
+  ["kun", "bao", "bi", "guan", "yu", "jin", "cui", "fou", 
+   "qian", "gen", "jian", "jian", "xiaoguo", "lu1", "xian", "dun", 
+   "shi", "meng", "kan", "huan", "jie", "weiji", "kun", "song", 
+   "sheng", "gu", "jing", "xun", "heng", "ding", "daguo", "gou", 
+   "fu", "yi", "tun", "yi", "zhen", "shike", "sui", "wuwang", 
+   "mingyi", "bi", "jiji", "jiaren", "feng", "li", "ge", "tongren", 
+   "lin", "sun", "jie", "zhongfu", "guimei", "kui", "dui", "lu", 
+   "tai", "daxu", "xu", "xiaoxu", "dazhuang", "dayou", "guai", "qian"]
 ]
 
 console.debug("Symbols and Characters loaded.");

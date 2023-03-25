@@ -53,4 +53,23 @@ function getSexagenaryDate(date, longitude) {
 
 }
 
+function getGua(index, withLink = false) {
+    let html = `${X64[0][index]}<ruby>${X64[1][index]}<rt>${X64[2][index]}</rt></ruby>`;
+    if (withLink) {
+        html = `<a href="https://ctext.org/book-of-changes/${X64[3][index]}/zhs">${html}</a>`;
+    } 
+    return html
+}
+
+function checkLinks() {
+    // Does not work due to CORS 
+    X64[3].map((val) => fetch(`https://ctext.org/book-of-changes/${val}/zhs`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+        })
+    );
+}
+
 console.debug("Sexagenary Cycle functions loaded.")
