@@ -7,9 +7,10 @@
   <title>Calendar</title>
   <link rel="icon" href="favicon.svg">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  <script src="symbols.js"></script>
-  <script src="solar-coordinates.js"></script>
-  <script src="sexagenary-cycle.js"></script>
+  <script src="calendar/symbols.js"></script>
+  <script src="calendar/solar-coordinates.js"></script>
+  <script src="calendar/sexagenary-cycle.js"></script>
+  <script src="calendar/latin-date-notation.js"></script>
 </head>
 
 <body>
@@ -109,8 +110,9 @@
     function getCustomDateString(date) {
       let weekday = date.getUTCDay();
       weekday = PLANETARY_SYMBOLS[weekday][0];
-      date = date.toLocaleDateString("ar-EG").replace(/\//g, "-");
-      return weekday + " " + date;
+      // date = date.toLocaleDateString("ar-EG").replace(/\//g, "-");
+      let latinDate = convertToLatinDate(date.getFullYear(), date.getMonth(), date.getDate());
+      return weekday + " " + latinDate;
     }
 
     let now = new Date();
