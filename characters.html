@@ -77,7 +77,7 @@
 
     // Create Sexagenary Table Caption
     let sexagenaryCaption = document.getElementById("ganzhi-caption");
-    EARTHLY_BRANCHES.slice(1).forEach((elem) => {
+    EARTHLY_BRANCHES.forEach((elem) => {
       let col = document.createElement("td");
       col.innerText = elem[0];
       sexagenaryCaption.appendChild(col);
@@ -91,7 +91,7 @@
         row = document.createElement("tr");
         let col = document.createElement("td");
         j = i % 10;
-        col.innerText = HEAVENLY_STEMS.slice(1)[j][0];
+        col.innerText = HEAVENLY_STEMS[j][0];
         row.appendChild(col); 
       }            
       let col = document.createElement("td");
@@ -102,7 +102,7 @@
       }
     }
 
-    let bagua = BAGUA.slice(7);
+    let bagua = BAGUA.slice(6);
 
     let liusiguaCaption = document.getElementById('liusigua-caption');
     bagua.forEach((elem) => {
@@ -188,19 +188,19 @@
     }
 
     // Add heavenly stems
-    createHorizontalTable(HEAVENLY_STEMS, document.getElementById("tiangan"));
+    createHorizontalTable(HEAVENLY_STEMS_WITH_CAPTIONS, document.getElementById("tiangan"));
     // Add earthly branches
-    createHorizontalTable(EARTHLY_BRANCHES, document.getElementById("dizhi"));
+    createHorizontalTable(EARTHLY_BRANCHES_WITH_CAPTIONS, document.getElementById("dizhi"));
 
     // Add solar terms
-    createVerticalTable(SOLAR_TERMS, document.getElementById("jieqi"));
+    createVerticalTable(SOLAR_TERMS_WITH_CAPTIONS, document.getElementById("jieqi"));
     // Add planetary symbols
-    createHorizontalTable(PLANETARY_SYMBOLS, document.getElementById("planets"), false);
+    createHorizontalTable(PLANETARY_SYMBOLS_WITH_CAPTIONS, document.getElementById("planets"), false);
     // Add eastern Arabic numberals
     createHorizontalTable(EASTERN_ARABIC_NUMERALS, document.getElementById("arabic-numerals"), true, false);
     
     // Add 八卦
-    createHorizontalTable(BAGUA, document.getElementById("bagua"), false);
+    createHorizontalTable(BAGUA_WITH_CAPTIONS, document.getElementById("bagua"), false);
   </script>
 </body>
 

@@ -1,4 +1,4 @@
-const HEAVENLY_STEMS = [
+const HEAVENLY_STEMS_WITH_CAPTIONS = [
     ['汉字', '拼音'],
     ["甲", "jiǎ"],   // 1
     ["乙", "yǐ"],    // 2
@@ -11,8 +11,9 @@ const HEAVENLY_STEMS = [
     ["壬", "rén"],   // 9
     ["癸", "guǐ"],   // 10
 ];
+const HEAVENLY_STEMS = HEAVENLY_STEMS_WITH_CAPTIONS.slice(1);
 
-const EARTHLY_BRANCHES = [
+const EARTHLY_BRANCHES_WITH_CAPTIONS = [
     ['汉字', '拼音'],
     ["子", "zǐ"],    // 1
     ["丑", "chǒu"],  // 2
@@ -27,8 +28,9 @@ const EARTHLY_BRANCHES = [
     ["戌", "xū"],    // 11
     ["亥", "hài"],   // 12
 ];
+const EARTHLY_BRANCHES = EARTHLY_BRANCHES_WITH_CAPTIONS.slice(1);
 
-const SOLAR_TERMS = [
+const SOLAR_TERMS_WITH_CAPTIONS = [
     ['汉字', '拼音', '太阳位于黄经角度'],
     ["立春", "lìchūn", 315], // Feb 4 / 1st month initial
     ["雨水", "yǔshuǐ", 330], // Feb 19 / 1st month midpoint
@@ -55,8 +57,9 @@ const SOLAR_TERMS = [
     ["小寒", "xiǎohán", 285], // Jan 6 / 12th month initial
     ["大寒", "dàhán", 300], // Jan 20 / 12th month midpoint
 ];
+const SOLAR_TERMS = SOLAR_TERMS_WITH_CAPTIONS.slice(1);
 
-const PLANETARY_SYMBOLS = [
+const PLANETARY_SYMBOLS_WITH_CAPTIONS = [
     ['Symbol', 'Planet', 'Weekday'],
     ["☉", "Sun", "Sunday"],
     ["☾", "Moon", "Monday"],
@@ -66,6 +69,7 @@ const PLANETARY_SYMBOLS = [
     ["♀", "Venus", "Friday"],
     ["♄", "Saturn", "Saturday"],
 ];
+const PLANETARY_SYMBOLS = PLANETARY_SYMBOLS_WITH_CAPTIONS.slice(1);
 
 const EASTERN_ARABIC_NUMERALS = [
     "٠",
@@ -81,7 +85,7 @@ const EASTERN_ARABIC_NUMERALS = [
     "١٠",
 ];
 
-const BAGUA = [
+const BAGUA_WITH_CAPTIONS = [
     ['卦', '汉字', '拼音'],
     ["⚋", "阴爻", "yīnyáo"],
     ["⚊", "阳爻", "yángyáo"],
@@ -98,6 +102,7 @@ const BAGUA = [
     ["☱", "兑", "duì"],
     ["☰", "乾", "qián"]
 ]
+const BAGUA = BAGUA_WITH_CAPTIONS.slice(1);
 
 const X64 = [
   ["䷁", "䷖", "䷇", "䷓", "䷏", "䷢", "䷬", "䷋",
