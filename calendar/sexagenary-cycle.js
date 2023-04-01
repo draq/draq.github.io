@@ -1,6 +1,9 @@
-const SEXAGENARY_DAY_START_MS = Date.UTC(2021, 0, 15, 16);  // 16 Jan 2021 00:00:00 GMT+0800 (Beijing Time) in milliseconds since Unix epoch.
-const SEXAGENARY_MONTH_START_MS = Date.UTC(2018, 11, 6, 16); // 2018年12月07 00:00:00 GMT+0800 (Beijing Time) in milliseconds since Unix epoch.
-const SEXAGENARY_YEAR_START_MS = Date.UTC(1984, 01, 03, 16); // 1984年02月04日 00:00:00 GMT+0800 (Beijing Time) in milliseconds since Unix epoch.
+// const SEXAGENARY_DAY_START_MS = Date.UTC(2021, 0, 15, 16);  // 16 Jan 2021 00:00:00 GMT+0800 (Beijing Time) in milliseconds since Unix epoch.
+// const SEXAGENARY_MONTH_START_MS = Date.UTC(2018, 11, 6, 16); // 2018年12月07 00:00:00 GMT+0800 (Beijing Time) in milliseconds since Unix epoch.
+// const SEXAGENARY_YEAR_START_MS = Date.UTC(1984, 01, 03, 16); // 1984年02月04日 00:00:00 GMT+0800 (Beijing Time) in milliseconds since Unix epoch.
+const SEXAGENARY_DAY_START_MS   = Number(new Date(2021,  0, 16));  // 16 Jan 2021 00:00:00 in milliseconds since Unix epoch.
+const SEXAGENARY_MONTH_START_MS = Number(new Date(2018, 11,  7));  // 2018年12月07 00:00:00 in milliseconds since Unix epoch.
+const SEXAGENARY_YEAR_START_MS  = Number(new Date(1984,  1,  4));  // 1984年02月04日 00:00:00 in milliseconds since Unix epoch.
 const DAY_IN_MS = 24 * 3600 * 1000;
 const YEAR_IN_MS = DAY_IN_MS * 365.24219;
 
@@ -51,25 +54,6 @@ function getSexagenaryDate(date, longitude) {
     let date_ms = Number(date);
     return `${getSexagenaryYear(date_ms)}年 ${getSexagenaryMonth(date_ms, longitude)}月 ${getSexagenaryDay(date_ms)}日`;
 
-}
-
-function getGua(index, withLink = false) {
-    let html = `${X64[0][index]}<ruby>${X64[1][index]}<rt>${X64[2][index]}</rt></ruby>`;
-    if (withLink) {
-        html = `<a href="https://ctext.org/book-of-changes/${X64[3][index]}/zhs">${html}</a>`;
-    } 
-    return html
-}
-
-function checkLinks() {
-    // Does not work due to CORS 
-    X64[3].map((val) => fetch(`https://ctext.org/book-of-changes/${val}/zhs`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-        })
-    );
 }
 
 console.debug("Sexagenary Cycle functions loaded.")
