@@ -135,14 +135,14 @@
     }
 
     let now = new Date();
-    document.getElementById("utc-datetime").textContent = now.toUTCString();
+    document.getElementById("utc-datetime").textContent = `${PLANETARY_SYMBOLS[now.getDay()][0]} ${now.toUTCString()}`;
 
     fetch(`calendar/chinese/${now.getFullYear()}.min.json`)
         .then(response => response.json())
         .then(data => data.find(d => d.gregorian.year == now.getFullYear() && 
                                                       d.gregorian.month == now.getMonth() + 1 &&
                                                       d.gregorian.date == now.getDate()))
-        .then(d => document.getElementById("nongli").textContent = `${PLANETARY_SYMBOLS[now.getDay()][0]} ${d.lunar.year} ${d.lunar.month} ${d.lunar.date}`)
+        .then(d => document.getElementById("nongli").textContent = `${d.lunar.year}年 ${d.lunar.month} ${d.lunar.date}日`)
         .catch(error => {
           console.error(error);
           alert('Error fetching data:', error.message);
