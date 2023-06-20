@@ -42,12 +42,16 @@
             <td id="utc-datetime"></td>
           </tr>
           <tr>
+            <td>Local time</td>
+            <td><strong id="local-datetime"></strong></td>
+          </tr>
+          <tr>
             <td>农历</td>
             <td><strong id="nongli"></strong></td>
           </tr>
           <tr>
             <td>干支</td>
-            <td><strong id="sexagenary-date"></strong></td>
+            <td id="sexagenary-date"></td>
           </tr>
           <tr>
             <td>节气</td>
@@ -57,10 +61,12 @@
             <td>Julian Date (JD)</td>
             <td id="julian-date"></td>
           </tr>
+        <!--
           <tr>
             <td>卦</td>
             <td id="gua"></td>
           </tr>
+        -->
         </tbody>
       </table>
     </section>
@@ -95,6 +101,10 @@
         </tbody>
       </table>
     </section>
+    <section>
+       <h2>Geolocation</h2>
+       <p id="geolocation"></p>
+    </section>
   </main>
   <footer>
     <p style="text-align: center;">Reference: <a href="characters.html">Table of Characters</a></p>
@@ -106,8 +116,8 @@
     </p>
   </footer>
   <script>
+    /*
     function getCustomDateString(date) {
-      /* NOT IN USE */
       let weekday = date.getDay();
       weekday = PLANETARY_SYMBOLS[weekday][0];
       date = date.toLocaleDateString("ar-EG").replace(/\//g, "-");
@@ -122,6 +132,7 @@
       } 
       return html;
     }
+    */
 
     function checkLinks() {
         // Does not work due to CORS 
@@ -134,8 +145,25 @@
         );
     }
 
+    navigator.geolocation.getCurrentPosition(
+      function(pos) {
+        const crd = pos.coords;
+        document.getElementById("geolocation").textContent = `Latitude : ${crd.latitude}, Longitude: ${crd.longitude}, Accuracy: ${crd.accuracy} meters.`;
+      },
+      function (err) {
+        document.getElementById("geolocation").textContent = `ERROR(${err.code}): ${err.message}`;
+      }, 
+      options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      }
+    );
+
+
     let now = new Date();
-    document.getElementById("utc-datetime").textContent = `${PLANETARY_SYMBOLS[now.getDay()][0]} ${now.toUTCString()}`;
+    document.getElementById("utc-datetime").textContent = now.toUTCString();
+    document.getElementById("local-datetime").textContent = `${PLANETARY_SYMBOLS[now.getDay()][0]} ${now.toString()}`;
 
     fetch(`calendar/chinese/${now.getFullYear()}.min.json`)
         .then(response => response.json())
@@ -154,9 +182,8 @@
     document.getElementById("sexagenary-date").innerHTML = getSexagenaryDate(now, longitude);
     document.getElementById("solar-term").innerHTML = getSolarTerm(longitude);
     document.getElementById("julian-date").textContent = julianDate.toFixed(4);
-    // document.getElementById("custom-date").textContent = getCustomDateString(now);
-    let randomGua = Math.floor(Math.random() * 64);
-    document.getElementById("gua").innerHTML = getGua(randomGua, true);
+    // let randomGua = Math.floor(Math.random() * 64);
+    // document.getElementById("gua").innerHTML = getGua(randomGua, true);
 
     document.getElementById("solar-longitude").textContent = longitude.toFixed(4);
     document.getElementById("solar-latitude").textContent = latitude;
