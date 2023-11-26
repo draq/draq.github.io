@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <script src="calendar/symbols.js"></script>
   <script src="calendar/sexagenary-cycle.js"></script>
+  <script src="calendar/utils.js"></script>
 </head>
 
 <body>
@@ -53,23 +54,6 @@
       <table id="jieqi">
       </table>
     </section>
-    <section>
-      <h2>八卦</h2>
-      <table id="bagua">
-      </table>
-    </section>
-    <section>
-      <h2>六十四卦</h2>
-      <table id="liusigua">
-        <thead>
-          <tr id="liusigua-caption">
-            <td></td>
-          </tr>
-        </thead>
-        <tbody id="liusigua-table" class="decorated">
-        </tbody>
-      </table>
-    </section>
   </main>
   <footer>
   </footer>
@@ -102,91 +86,6 @@
       }
     }
 
-    let bagua = BAGUA.slice(6);
-
-    let liusiguaCaption = document.getElementById('liusigua-caption');
-    bagua.forEach((elem) => {
-      let col = document.createElement("td");
-      col.innerText = elem[0];
-      liusiguaCaption.appendChild(col);
-    });
-
-    let liusiguaTable = document.getElementById("liusigua-table");
-    for (let i = 0; i < 64; i++) {
-      if (i % 8 == 0) {
-        row = document.createElement("tr");
-        let col = document.createElement("td");
-        col.innerText = bagua[Math.floor(i / 8)][0];
-        row.appendChild(col);
-      }
-      let col = document.createElement('td');
-      col.innerHTML = getGua(i);
-      row.appendChild(col);
-      if ((i + 1) % 8 == 0) {
-        liusiguaTable.appendChild(row);
-      }
-    }
-
-
-    function createVerticalTable(elemList, tableElem) {
-      let header = document.createElement('thead');
-      let body = document.createElement('tbody');
-      tableElem.appendChild(header);
-      tableElem.appendChild(body);
-      headerRow = document.createElement('tr');
-      header.appendChild(headerRow);
-      elemList[0].forEach((val, _) => {
-        let td = document.createElement('td');
-        td.innerText = val;
-        headerRow.appendChild(td);
-      })
-
-      elemList.slice(1).forEach((values, _) => {
-        let row = document.createElement('tr');
-        values.forEach((val, idx) => {
-          let td = document.createElement('td');
-          td.innerText = val;
-          if (idx == 2) { // special sauce for solar terms
-            td.classList.add('degree');
-          }
-          row.appendChild(td);
-        });
-        body.appendChild(row);
-      });
-    }
-
-    function createHorizontalTable(elemList, tableElem, withIndex = true, decorated = true) {
-      let dimension = (typeof elemList[0] == "string" ? 1 : elemList[0].length) + (withIndex ? 1 : 0);
-      let rows = Array.from({length: dimension}, (_, i) => document.createElement('tr'));
-      let header = document.createElement('thead');
-      let body = document.createElement('tbody');
-      tableElem.appendChild(header);
-      tableElem.appendChild(body);
-      if (decorated) {
-        body.classList.add('decorated');
-      }
-      header.appendChild(rows[0]);
-      rows.slice(1).forEach((row, _) => body.appendChild(row));
-
-      elemList.forEach((values, idx) => {
-        if (!Array.isArray(values)) {
-          values = [values];
-        }
-        if (withIndex) {
-          if (idx === 0  && decorated) {
-            idx = '次序';
-          }
-          values.unshift(idx);
-        }
-
-        values.forEach((val, idx) => {
-          let td = document.createElement('td');
-          td.innerText = val;
-          rows[idx].appendChild(td);
-        });
-      });
-    }
-
     // Add heavenly stems
     createHorizontalTable(HEAVENLY_STEMS_WITH_CAPTIONS, document.getElementById("tiangan"));
     // Add earthly branches
@@ -197,10 +96,7 @@
     // Add planetary symbols
     createHorizontalTable(PLANETARY_SYMBOLS_WITH_CAPTIONS, document.getElementById("planets"), false);
     // Add eastern Arabic numberals
-    createHorizontalTable(EASTERN_ARABIC_NUMERALS, document.getElementById("arabic-numerals"), true, false);
-    
-    // Add 八卦
-    createHorizontalTable(BAGUA_WITH_CAPTIONS, document.getElementById("bagua"), false);
+    createHorizontalTable(EASTERN_ARABIC_NUMERALS, document.getElementById("arabic-numerals"), true, false);   
   </script>
 </body>
 

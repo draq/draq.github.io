@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="易经">
+  <title>易经</title>
+  <link rel="icon" href="favicon.svg">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <script src="calendar/yijing.js"></script>
+  <script src="calendar/utils.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>易经</h1>
+  </header>
+  <main>
+    <section>
+      <h2>兩儀 四象</h2>
+      <table id="sixiang">
+      </table>
+    </section>
+    <section>
+      <h2>八卦</h2>
+      <table id="bagua">
+      </table>
+    </section>
+    <section>
+      <h2>六十四卦</h2>
+      <table id="liusigua">
+        <thead>
+          <tr id="liusigua-caption">
+            <td></td>
+          </tr>
+        </thead>
+        <tbody id="liusigua-table" class="decorated">
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <footer>
+  </footer>
+  <script>
+
+    let liusiguaCaption = document.getElementById('liusigua-caption');
+    BAGUA.forEach((elem) => {
+      let col = document.createElement("td");
+      col.innerText = elem[0];
+      liusiguaCaption.appendChild(col);
+    });
+
+    let liusiguaTable = document.getElementById("liusigua-table");
+    for (let i = 0; i < 64; i++) {
+      if (i % 8 == 0) {
+        row = document.createElement("tr");
+        let col = document.createElement("td");
+        col.innerText = BAGUA[Math.floor(i / 8)][0];
+        row.appendChild(col);
+      }
+      let col = document.createElement('td');
+      col.innerHTML = getGua(i);
+      row.appendChild(col);
+      if ((i + 1) % 8 == 0) {
+        liusiguaTable.appendChild(row);
+      }
+    }
+    // Add 四象
+    createHorizontalTable(SIXIANG_WITH_CAPTIONS, document.getElementById("sixiang"), false);
+
+    // Add 八卦
+    createHorizontalTable(BAGUA_WITH_CAPTIONS, document.getElementById("bagua"), false);
+
+    /* Does not work due to CORS
+    function checkLinks() {
+      X64[3].map((val) => fetch(`https://ctext.org/book-of-changes/${val}/zhs`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+        })
+      );
+    }
+    */
+  </script>
+
+
+</body>
+
+</html>

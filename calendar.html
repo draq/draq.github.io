@@ -124,26 +124,7 @@
       // let latinDate = convertToLatinDate(date.getFullYear(), date.getMonth(), date.getDate());
       return weekday + " " + latinDate;
     }
-
-    function getGua(index, withLink = false) {
-      let html = `${X64[0][index]}<ruby>${X64[1][index]}<rt>${X64[2][index]}</rt></ruby>`;
-      if (withLink) {
-          html = `<a href="https://ctext.org/book-of-changes/${X64[3][index]}/zhs">${html}</a>`;
-      } 
-      return html;
-    }
     */
-
-    function checkLinks() {
-        // Does not work due to CORS 
-        X64[3].map((val) => fetch(`https://ctext.org/book-of-changes/${val}/zhs`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-            })
-        );
-    }
 
     navigator.geolocation.getCurrentPosition(
       function(pos) {
@@ -159,7 +140,6 @@
         maximumAge: 0,
       }
     );
-
 
     let now = new Date();
     document.getElementById("utc-datetime").textContent = now.toUTCString();
@@ -182,8 +162,6 @@
     document.getElementById("sexagenary-date").innerHTML = getSexagenaryDate(now, longitude);
     document.getElementById("solar-term").innerHTML = getSolarTerm(longitude);
     document.getElementById("julian-date").textContent = julianDate.toFixed(4);
-    // let randomGua = Math.floor(Math.random() * 64);
-    // document.getElementById("gua").innerHTML = getGua(randomGua, true);
 
     document.getElementById("solar-longitude").textContent = longitude.toFixed(4);
     document.getElementById("solar-latitude").textContent = latitude;
