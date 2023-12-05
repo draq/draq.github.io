@@ -71,16 +71,16 @@ const X64 = [
     "tài", "dàxù", "xū", "xiǎoxù", "dàzhuàng", "dàyǒu", "guài", "qian"],
   // Links for https://ctext.org/book-of-changes/zhs
   ["kun", "bao", "bi", "guan", "yu", "jin", "cui", "fou",
-    "qian", "gen", "jian", "jian", "xiaoguo", "lu1", "xian", "dun",
-    "shi", "meng", "kan", "huan", "jie", "weiji", "kun", "song",
-    "sheng", "gu", "jing", "xun", "heng", "ding", "daguo", "gou",
-    "fu", "yi", "tun", "yi", "zhen", "shike", "sui", "wuwang",
-    "mingyi", "bi", "jiji", "jiaren", "feng", "li", "ge", "tongren",
-    "lin", "sun", "jie", "zhongfu", "guimei", "kui", "dui", "lu",
-    "tai", "daxu", "xu", "xiaoxu", "dazhuang", "dayou", "guai", "qian"]
+    "qian", "gen", "jian", "jian1", "xiao-guo", "lu1", "xian", "dun",
+    "shi", "meng", "kan", "huan", "jie", "wei-ji", "kun1", "song",
+    "sheng", "gu", "jing", "xun", "heng", "ding", "da-guo", "gou",
+    "fu", "yi", "tun", "yi1", "zhen", "shi-ke", "sui", "wu-wang",
+    "ming-yi", "bi", "ji-ji", "jia-ren", "feng", "li", "ge", "tong-ren",
+    "lin", "sun", "jie1", "zhong-fu", "gui-mei", "kui", "dui", "lu",
+    "tai", "da-xu", "xu", "xiao-xu", "da-zhuang", "da-you", "guai", "qian"]
 ]
 
-function getGua(index, withLink = true) {
+function getGua(index, withLink = false) {
   let html = `${X64[0][index]}<ruby>${X64[1][index]}<rt>${X64[2][index]}</rt></ruby>`;
   if (withLink) {
     // ens for English, zhs for Simplied, zh for Traditional
@@ -168,7 +168,36 @@ function yarrow(debug = false) {
 
 }
 
-function divinate() {
+function calculateSum(arr, reverse = false) {
+  if (!Array.isArray(arr)) {
+    throw new Error('Input must be an array!');
+  }
+
+  let sum = 0;
+  let index = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] < 6 || arr[i] > 9) {
+      throw new Error("Value must be between 6 and 9!");
+    } else {
+      if (reverse) {
+        if (arr[i] === 6 || arr[i] === 7) {
+          k = 1;
+        } else if (arr[i] === 8 || arr[i] === 9) {
+          k = 0;
+        } 
+      }
+      else {
+        k = arr[i] % 2;
+      }
+    }
+    index += k * Math.pow(2, arr.length - i - 1);
+    sum += k * Math.pow(2, i);
+  }
+  return `${getGua(index, withLink=true)} (${sum})`;
+}
+
+
+function divinate(element) {
   // We build from bottom to top
   let tossArray = [0, 0, 0, 0, 0, 0];
 
@@ -184,18 +213,23 @@ function divinate() {
     for (let line = 5; line >= 0; line--) {
       let val = tossArray[line];
       if (val === 6) {
-        lines += '<tr><td>6</td><td>==&nbsp;&nbsp;==</td><td>------</td></tr>';
+        lines += '<tr><td>6</td><td style="color: red;">--&nbsp;&nbsp;--</td><td>------</td></tr>';
       } else if (val === 7) {
         lines += '<tr><td>7</td><td>------</td><td>------</td></tr>';
       } else if (val === 8) {
         lines += '<tr><td>8</td><td>--&nbsp;&nbsp;--</td><td>--&nbsp;&nbsp;--</td></tr>';
       } else if (val === 9) {
-        lines += '<tr><td>9</td><td>======</td><td>--&nbsp;&nbsp;--</td></tr>';
+        lines += '<tr><td>9</td><td style="color: red;">------</td><td>--&nbsp;&nbsp;--</td></tr>';
       }
     }
     return lines;
   }
 
-  // Assuming tossArray is already defined
-  return getLinesInReverse(tossArray);
+  lines = getLinesInReverse(tossArray);
+  lines += `<tr style="font-size: 150%;"><td></td><td>${calculateSum(tossArray)}</td><td>${calculateSum(tossArray, reverse=true)}</td></tr>`;
+  
+  tbody = document.createElement('tbody');
+  tbody.innerHTML = lines;
+  element.appendChild(tbody);
+  element.style.display = 'table';
 }

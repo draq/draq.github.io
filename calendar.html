@@ -3,13 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="Calendar">
-  <title>Calendar</title>
+  <meta name="description" content="日历">
+  <title>日历</title>
   <link rel="icon" href="favicon.svg">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <script src="calendar/symbols.js"></script>
   <script src="calendar/solar-coordinates.js"></script>
   <script src="calendar/sexagenary-cycle.js"></script>
+  <script src="calendar/utils.js"></script>
 </head>
 
 <body>
@@ -61,7 +62,7 @@
             <td>Julian Date (JD)</td>
             <td id="julian-date"></td>
           </tr>
-        <!--
+          <!--
           <tr>
             <td>卦</td>
             <td id="gua"></td>
@@ -102,8 +103,8 @@
       </table>
     </section>
     <section>
-       <h2>Geolocation</h2>
-       <p id="geolocation"></p>
+      <h2>Geolocation</h2>
+      <p id="geolocation"></p>
     </section>
   </main>
   <footer>
@@ -127,13 +128,13 @@
     */
 
     navigator.geolocation.getCurrentPosition(
-      function(pos) {
+      function (pos) {
         const crd = pos.coords;
         document.getElementById("geolocation").textContent = `Latitude : ${crd.latitude}, Longitude: ${crd.longitude}, Accuracy: ${crd.accuracy} meters.`;
       },
       function (err) {
         document.getElementById("geolocation").textContent = `ERROR(${err.code}): ${err.message}`;
-      }, 
+      },
       options = {
         enableHighAccuracy: true,
         timeout: 5000,
@@ -143,22 +144,13 @@
 
     let now = new Date();
     document.getElementById("utc-datetime").textContent = now.toUTCString();
-    document.getElementById("local-datetime").textContent = `${PLANETARY_SYMBOLS[now.getDay()][0]} ${now.toString()}`;
+    document.getElementById("local-datetime").textContent = getLocalDatetime(now);
 
-    fetch(`calendar/chinese/${now.getFullYear()}.min.json`)
-        .then(response => response.json())
-        .then(data => data.find(d => d.gregorian.year == now.getFullYear() && 
-                                                      d.gregorian.month == now.getMonth() + 1 &&
-                                                      d.gregorian.date == now.getDate()))
-        .then(d => document.getElementById("nongli").textContent = `${d.lunar.year}年 ${d.lunar.month} ${d.lunar.date}日`)
-        .catch(error => {
-          console.error(error);
-          alert('Error fetching data:', error.message);
-        });
+    setChineseDate(now, 'nongli');
 
     let julianDate = calculateJulianDate(now);
     let { longitude, latitude, distance } = calculateSolarEclipicCoordinates(julianDate);
-    
+
     document.getElementById("sexagenary-date").innerHTML = getSexagenaryDate(now, longitude);
     document.getElementById("solar-term").innerHTML = getSolarTerm(longitude);
     document.getElementById("julian-date").textContent = julianDate.toFixed(4);
@@ -175,7 +167,7 @@
     document.getElementById("right-ascension").textContent = `${degree}h ${minute}m ${second.toFixed(0)}s (${rightAscension.toFixed(0)}°)`;
     document.getElementById("declination").textContent = declination.toFixed(4);
 
-</script>
+  </script>
 </body>
 
 </html>

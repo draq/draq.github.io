@@ -57,3 +57,28 @@ function createHorizontalTable(elemList, tableElem, withIndex = true, decorated 
     });
 }
 
+function getLocalDatetime(datetime) {
+    const dateOptions = {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+        timeZoneName: 'short',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+    };
+    return `${PLANETARY_SYMBOLS[datetime.getDay()][0]} ${datetime.toLocaleDateString('en-GB', dateOptions)}`;
+}
+
+function setChineseDate(datetime, elementId) {
+    fetch(`calendar/chinese/${now.getFullYear()}.min.json`)
+        .then(response => response.json())
+        .then(data => data.find(d => d.gregorian.year == datetime.getFullYear() &&
+            d.gregorian.month == datetime.getMonth() + 1 &&
+            d.gregorian.date == datetime.getDate()))
+        .then(d => document.getElementById(elementId).textContent = `${d.lunar.year}年 ${d.lunar.month} ${d.lunar.date}日`)
+        .catch(error => {
+            console.error(error);
+            alert('Error fetching data:', error.message);
+        });
+}

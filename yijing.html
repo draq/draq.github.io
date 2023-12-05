@@ -8,6 +8,7 @@
   <link rel="icon" href="favicon.svg">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <script src="calendar/yijing.js"></script>
+  <script src="calendar/symbols.js"></script>
   <script src="calendar/utils.js"></script>
 </head>
 
@@ -27,8 +28,15 @@
       </table>
     </section>
     <section>
-      <h2>占卜</h2>
-      <table id="divination" style="font-family: 'Courier New', Courier, monospace;">
+      <h2 onclick='divinate(document.getElementById("divination"))'>占卜</h2>
+      <table id='divination' style="display: none; font-family: 'Courier New', Courier, monospace;">
+        <thead>
+          <tr>
+            <td>爻</td>
+            <td>原卦</td>
+            <td>变卦</td>
+          </tr>
+        </thead>
       </table>
     </section>
     <section>
@@ -45,6 +53,12 @@
     </section>
   </main>
   <footer>
+    <p style="text-align: center;"><span id="local-datetime" ></span> (<span id="nongli"></span>)</p>
+    <script>
+      now = new Date();
+      document.getElementById("local-datetime").textContent = getLocalDatetime(now);
+      setChineseDate(now, "nongli");
+    </script>
   </footer>
   <script>
 
@@ -64,7 +78,7 @@
         row.appendChild(col);
       }
       let col = document.createElement('td');
-      col.innerHTML = getGua(63-i);
+      col.innerHTML = getGua(63 - i);
       row.appendChild(col);
       if ((i + 1) % 8 == 0) {
         liusiguaTable.appendChild(row);
@@ -87,8 +101,6 @@
       );
     }
     */
-
-    document.getElementById("divination").innerHTML = divinate();
   </script>
 
 
