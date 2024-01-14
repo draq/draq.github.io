@@ -1,0 +1,74 @@
+volume,genre,name,chapters,id
+Old,Pentateuch,Genesis,50,OT-01_Genesis
+Old,Pentateuch,Exodus,40,OT-02_Exodus
+Old,Pentateuch,Leviticus,27,OT-03_Leviticus
+Old,Pentateuch,Numbers,36,OT-04_Numbers
+Old,Pentateuch,Deuteronomy,34,OT-05_Deuteronomy
+Old,History,Joshua,24,OT-06_Joshua
+Old,History,Judges,21,OT-07_Judges
+Old,History,Ruth,4,OT-08_Ruth
+Old,History,1 Samuel,31,OT-09_1-Samuel
+Old,History,2 Samuel,24,OT-10_2-Samuel
+Old,History,1 Kings,22,OT-11_1-Kings
+Old,History,2 Kings,25,OT-12_2-Kings
+Old,History,1 Chronicles,29,OT-13_1-Chronicles
+Old,History,2 Chronicles,36,OT-14_2-Chronicles
+Old,History,Ezra,10,OT-15_Ezra
+Old,History,Nehemiah,13,OT-16_Nehemiah
+Old,Deuterocanonical,Tobit,14,OT-17_Tobit
+Old,Deuterocanonical,Judith,16,OT-18_Judith
+Old,Wisdom,Esther,15,OT-19_Esther
+Old,Wisdom,Job,42,OT-20_Job
+Old,Wisdom,Psalms,150,OT-21_Psalms
+Old,Wisdom,Proverbs,31,OT-22_Proverbs
+Old,Wisdom,Ecclesiastes,12,OT-23_Ecclesiastes
+Old,Wisdom,Song of Solomon,8,OT-24_Song2
+Old,Wisdom,Wisdom,19,OT-25_Wisdom
+Old,Wisdom,Sirach,52,OT-26_Sirach
+Old,Major Prophets,Isaiah,66,OT-27_Isaiah
+Old,Major Prophets,Jeremiah,52,OT-28_Jeremiah
+Old,Major Prophets,Lamentations,5,OT-29_Lamentations
+Old,Major Prophets,Baruch,6,OT-30_Baruch
+Old,Major Prophets,Ezekiel,48,OT-31_Ezekiel
+Old,Major Prophets,Daniel,14,OT-32_Daniel
+Old,Minor Prophets,Hosea,14,OT-33_Hosea
+Old,Minor Prophets,Joel,3,OT-34_Joel
+Old,Minor Prophets,Amos,9,OT-35_Amos
+Old,Minor Prophets,Obadiah,1,OT-36_Obadiah
+Old,Minor Prophets,Jonah,4,OT-37_Jonah
+Old,Minor Prophets,Micah,7,OT-38_Micah
+Old,Minor Prophets,Nahum,3,OT-39_Nahum
+Old,Minor Prophets,Habakkuk,3,OT-40_Habakkuk
+Old,Minor Prophets,Zephaniah,3,OT-41_Zephaniah
+Old,Minor Prophets,Haggai,2,OT-42_Haggai
+Old,Minor Prophets,Zechariah,14,OT-43_Zechariah
+Old,Minor Prophets,Malachi,4,OT-44_Malachi
+Old,Deuterocanonical,1 Maccabees,16,OT-45_1-Maccabees
+Old,Deuterocanonical,2 Maccabees,15,OT-46_2-Maccabees
+New,Gospel,Matthew,28,NT-01_Matthew
+New,Gospel,Mark,16,NT-02_Mark
+New,Gospel,Luke,24,NT-03_Luke
+New,Gospel,John,21,NT-04_John
+New,History,Acts,28,NT-05_Acts
+New,Pauline Epistles,Romans,16,NT-06_Romans
+New,Pauline Epistles,1 Corinthians,16,NT-07_1-Corinthians
+New,Pauline Epistles,2 Corinthians,13,NT-08_2-Corinthians
+New,Pauline Epistles,Galatians,6,NT-09_Galatians
+New,Pauline Epistles,Ephesians,6,NT-10_Ephesians
+New,Pauline Epistles,Philippians,4,NT-11_Philippians
+New,Pauline Epistles,Colossians,4,NT-12_Colossians
+New,Pauline Epistles,1 Thessalonians,5,NT-13_1-Thessalonians
+New,Pauline Epistles,2 Thessalonians,3,NT-14_2-Thessalonians
+New,Pastoral Epistles,1 Timothy,6,NT-15_1-Timothy
+New,Pastoral Epistles,2 Timothy,4,NT-16_2-Timothy
+New,Pastoral Epistles,Titus,3,NT-17_Titus
+New,General Epistles,Philemon,1,NT-18_Philemon
+New,General Epistles,Hebrews,13,NT-19_Hebrews
+New,General Epistles,James,5,NT-20_James
+New,General Epistles,1 Peter,5,NT-21_1-Peter
+New,General Epistles,2 Peter,3,NT-22_2-Peter
+New,General Epistles,1 John,5,NT-23_1-John
+New,General Epistles,2 John,1,NT-24_2-John
+New,General Epistles,3 John,1,NT-25_3-John
+New,General Epistles,Jude,1,NT-26_Jude
+New,Prophecy,Revelation,22,NT-27_Revelation

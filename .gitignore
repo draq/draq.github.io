@@ -1,2 +1,3 @@
+data-archive/
 *.swp
-data/
+__pycache__/
