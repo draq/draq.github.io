@@ -8,7 +8,7 @@
     <title>Bible</title>
     <link rel="icon" href="favicon.svg">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <script src="bible/bible.js"></script>
+    <script defer src="bible/bible.js"></script>
     <style>
         body {
             justify-content: center;
@@ -39,35 +39,31 @@
 <body>
     <header>
         <h1>Bible</h1>
-        <p>A game like <a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a> and <a href="https://games.oec.world/en/tradle/">Tradle</a>.</p>
+        <p>A game like <a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a> and <a
+                href="https://games.oec.world/en/tradle/">Tradle</a>.</p>
     </header>
     <main>
         <blockquote>
             <p id="verse-content"></p>
             <cite id="verse-citation"></cite>
         </blockquote>
-        <table>
-            <thead>
-                <tr>
-                    <th>Volume</th>
-                    <th>Genre</th>
-                    <th>Book</th>
-                    <th>Capter</th>
-                    <th>Verse</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
-        
+        <form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Volume</th>
+                        <th>Genre</th>
+                        <th>Book</th>
+                        <th>Capter</th>
+                        <th>Verse</th>
+                    </tr>
+                </thead>
+                <tbody id='user-guesses'>
+                </tbody>
+            </table>
+            <button type="button" onclick="submitGuess()">Guess</button>
+        </form>
     </main>
 </body>
+
 </html>
