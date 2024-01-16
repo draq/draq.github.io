@@ -44,21 +44,26 @@
     </header>
     <main>
         <blockquote>
-            <p id="verse-content"></p>
-            <cite id="verse-citation"></cite>
+            <p id="verse-content" style="font-weight: bold;"></p>
+            <cite id="verse-citation" style="color: #f7f7f7;"></cite>
         </blockquote>
+        <table>
+            <thead>
+                <tr>
+                    <th>Volume</th>
+                    <th>Genre</th>
+                    <th>Book</th>
+                    <th>Capter</th>
+                    <th>Verse</th>
+                    <th>Text</th>
+                </tr>
+            </thead>
+            <tbody id='user-guesses'>
+            </tbody>
+        </table>
         <form>
             <table>
-                <thead>
-                    <tr>
-                        <th>Volume</th>
-                        <th>Genre</th>
-                        <th>Book</th>
-                        <th>Capter</th>
-                        <th>Verse</th>
-                    </tr>
-                </thead>
-                <tbody id='user-guesses'>
+                <tbody id="user-input">
                 </tbody>
             </table>
             <button type="button" onclick="submitGuess()">Guess</button>

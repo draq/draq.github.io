@@ -71,9 +71,6 @@ let bookNames = tableOfContent
 async function getUserInput() {
     var row = document.createElement('tr');
 
-    row.appendChild(document.createElement('td'));
-    row.appendChild(document.createElement('td'));
-
     // Create a select input field for the third column
     var selectBook = document.createElement('select');
     selectBook.name = "book";
@@ -110,61 +107,96 @@ async function getUserInput() {
     return row;
 }
 
+function getCheckmarkedText(guessed, trueVal, checkForDistance = false) {
+    const correctGuess = guessed == trueVal; 
+    const checkMark = correctGuess ? '✅' : '❌';
+    if (!correctGuess && checkForDistance) {
+        guessed = parseInt(guessed);
+        trueVal = parseInt(trueVal);
+        const trueDistance = Math.abs(guessed - trueVal);
+        var distanceMarker;
+        if (trueDistance < 5) {
+            distanceMarker = "very hot";
+        } else if (trueDistance < 10) {
+            distanceMarker = "hot";
+        } else if (trueDistance < 30) {
+            distanceMarker = "cold";
+        } else {
+            distanceMarker = "very cold";
+        }
+        return `${guessed} ${checkMark} (${distanceMarker})`;
+    }
+    else {
+        return `${guessed} ${checkMark}`;
+    }
+}
 
 /* HTML element of last user input as a table row */
 async function getPastInput(bookId, chapterNumber, verseNumber) {
-    var row = document.createElement('tr');
+    const row = document.createElement('tr');
 
-    let tableOfContent_ = await tableOfContent;
-    guessMetadata = tableOfContent_[bookId];
+    const tableOfContent_ = await tableOfContent;
+    const guessMetadata = tableOfContent_[bookId];
 
-    volume = document.createElement('td');
-    volume.innerText = `${guessMetadata.volume} Testament`;
+    const volume = document.createElement('td');
+    volume.innerText = getCheckmarkedText(`${guessMetadata.volume} Testament`, `${bookMetadata.volume} Testament`);
     row.appendChild(volume);
 
-    genre = document.createElement('td');
-    genre.innerText = guessMetadata.genre;
+    const genre = document.createElement('td');
+    genre.innerText = getCheckmarkedText(guessMetadata.genre, bookMetadata.genre);
     row.appendChild(genre);
 
-    book = document.createElement('td');
-    book.innerText = guessMetadata.name;
+    const book = document.createElement('td');
+    book.innerText = getCheckmarkedText(guessMetadata.name, bookMetadata.name);
     row.appendChild(book);
 
-    chapter = document.createElement('td');
-    chapter.innerText = chapterNumber;
+    const chapter = document.createElement('td');
+    chapter.innerText = getCheckmarkedText(chapterNumber, randomChapter, guessMetadata.name == bookMetadata.name);
     row.appendChild(chapter);
 
-    verse = document.createElement('td');
-    verse.innerText = verseNumber;
+    const verse = document.createElement('td');
+    verse.innerText = getCheckmarkedText(verseNumber, randomVerse, guessMetadata.name == bookMetadata.name);
     row.appendChild(verse);
 
+    const textElement = document.createElement("td");
+    var verseText = await getVerse(bookId, chapterNumber, verseNumber);
+    verseText = verseText[0].length > 55 ? verseText[0].slice(0, 50) + "..." : verseText[0]; 
+    textElement.innerText = verseText;
+    row.appendChild(textElement);
     return row;
 }
+
 
 /* Global */
 var randomChapterId;
 var randomVerse;
-var chapter;
+var randomChapter;
 var bookId;
 var bookMetadata;
 
-/* Get random verse and displays on page. */
-async function getVerse() {
-    let data = await fetchAndReadCsv("bible/verses_metadata.csv");
-    randomChapterId = Math.floor(Math.random() * data["verses"].length);
-    randomVerse = Math.floor(Math.random() * data["verses"][randomChapterId] + 1);
-    chapter = data["chapter"][randomChapterId];
-    bookId = data['book_id'][randomChapterId];
-    let toc = await tableOfContent;
-    bookMetadata = toc[bookId];
+
+async function getVerse(bookId, chapter, verse) {
     let response = await fetch(`bible/data/${bookId}.json`)
     if (!response.ok) {
         throw new Error(`HTTP Status ${response.status}. Error fetch ${filename}.`);
     }
-    const book = await response.json();
-    const verseContent = book[chapter.toString()][randomVerse.toString()];
+    const bookContent = await response.json();
+    const verseContent = bookContent[chapter.toString()][verse.toString()];
     const verseCitation = `[${bookMetadata.volume} Testament ${bookMetadata.genre}] `
-        + `${bookMetadata.name} ${chapter}:${randomVerse} (Catholic Public Domain Version)`;
+        + `${bookMetadata.name} ${randomChapter}:${randomVerse} (Catholic Public Domain Version)`;
+    return [verseContent, verseCitation];
+}
+
+/* Get random verse and displays on page. */
+async function getRandomVerse() {
+    const data = await fetchAndReadCsv("bible/verses_metadata.csv");
+    randomChapterId = Math.floor(Math.random() * data["verses"].length);
+    randomVerse = Math.floor(Math.random() * data["verses"][randomChapterId] + 1);
+    randomChapter = data["chapter"][randomChapterId];
+    bookId = data['book_id'][randomChapterId];
+    let toc = await tableOfContent;
+    bookMetadata = toc[bookId];
+    let [verseContent, verseCitation] = await getVerse(bookId, randomChapter, randomVerse);
     return [verseContent, verseCitation];
 }
 
@@ -178,7 +210,7 @@ async function getVerse() {
 // })
 
 
-getVerse().then(
+getRandomVerse().then(
     ([verseContent, verseCitation]) => {
         document.getElementById("verse-content").innerText = verseContent;
         document.getElementById("verse-citation").innerText = verseCitation;
@@ -187,7 +219,7 @@ getVerse().then(
 
 getUserInput().then(
     row => {
-        userInput = document.getElementById("user-guesses");
+        userInput = document.getElementById("user-input");
         userInput.appendChild(row);
     }
 );
@@ -201,7 +233,7 @@ function submitGuess() {
     getPastInput(book, chapter, verse).then(
         row => {
             userInput = document.getElementById("user-guesses");
-            userInput.prepend(row);
+            userInput.appendChild(row);
         }
     )
 }
